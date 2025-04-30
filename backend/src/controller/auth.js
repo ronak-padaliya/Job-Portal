@@ -2,8 +2,9 @@ import bcrypt from "bcryptjs";
 
 import jwt from "jsonwebtoken";
 
-import Users from "../model/user";
-require("dotenv").config();
+import Users from "../model/user.js";
+import dotenv from "dotenv";
+dotenv.config();
 
 const signUp = async (req, res) => {
   try {
@@ -23,7 +24,7 @@ const signUp = async (req, res) => {
         .status(401)
         .json({ success: false, message: "Users is already exist" });
       return;
-    } 
+    }
 
     const hashPassword = await bcrypt.hash(password, 10);
     await Users.create({
